@@ -1,0 +1,51 @@
+{
+  "name": "api_prac",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "watch:build": "tsc --watch",
+    "watch:dist": "pm2-runtime process-dev.json",
+    "build": "rm -rf ./dist && tsc",
+    "dev": "concurrently npm:watch:*",
+    "start": "pm2-runtime process.json",
+    "test": "tsc && node ./dist/server.js",
+    "test2": "tsc && node ./dist/test.js",
+    "add": "tsc && node ./dist/config/generator.js",
+    "start:dev": "npm run build && npm run test",
+    "tester": "npm run build && node ./dist/pg/model/tester.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "bluebird": "^3.7.2",
+    "concurrently": "5.3.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "http": "0.0.1-security",
+    "jsonwebtoken": "^8.5.1",
+    "pg": "^8.7.1",
+    "random-name": "^0.1.2",
+    "random-title": "^1.0.4",
+    "restify": "^8.5.1",
+    "restify-plugins": "^1.6.0",
+    "rethinkdbdash": "^2.3.31",
+    "rethinkdbdash-timestampable": "0.0.2",
+    "secure-random-password": "^0.2.2",
+    "ts-node": "^9.1.1",
+    "twilio": "^3.61.0"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.2",
+    "@types/cors": "^2.8.12",
+    "@types/express": "^4.17.11",
+    "@types/jsonwebtoken": "^8.5.5",
+    "@types/pg": "^8.6.1",
+    "@types/restify": "^8.5.0",
+    "@types/rethinkdbdash": "github:typed-typings/rethinkdbdash",
+    "typescript": "^4.1.3"
+  }
+}
