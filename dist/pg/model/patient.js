@@ -3,8 +3,33 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const client_1 = __importDefault(require("../../config/client"));
 const pg_config_1 = __importDefault(require("../../config/pg_config"));
 class PatientModel {
+    static async getAllApointment(id) {
+        try {
+            const appointments = await client_1.default.table("appointment").filter({ personId: id }).run();
+            return appointments;
+        }
+        catch (error) {
+            console.log('@error', error);
+        }
+    }
+    static async getAllAppointmentByStatus(status) {
+        try {
+        }
+        catch (error) {
+            console.log('@error', error);
+        }
+    }
+    static async getNotification(id) {
+        try {
+            const notis = await client_1.default.table("notification").filter({ personId: id }).run();
+            return notis;
+        }
+        catch (error) {
+        }
+    }
     static async getAllPatient() {
         try {
             const client = await pg_config_1.default.connect();
@@ -19,16 +44,31 @@ class PatientModel {
     }
     static async bookAppoitment(appointment) {
         try {
-            const { appointmentDate, patientid, procedureName, session, status, isAdmin, } = appointment;
-            const client = await pg_config_1.default.connect();
-            const sql = `INSERT INTO appointment(appointmentdate, patientid, procedurename, session, status, is_admin, notification_flag )
-                   VALUES ('${appointmentDate}', ${patientid}, '${procedureName}', '${session}', '${status}', ${isAdmin}, '${1}')`;
-            const { command } = await client.query(sql);
-            client.release();
-            return { success: true, payload: { command, status: "good" } };
+            const date = new Date(appointment.appointmentDate);
+            const curr = new Date();
+            if (date < curr)
+                return { status: "invalid date" };
+            await client_1.default.table("appointment").insert(appointment).run();
+            return { status: "okay" };
         }
         catch (error) {
             console.log("@@@error : ", error);
+        }
+    }
+    static async deleteNotification(id) {
+        try {
+            await client_1.default.table("notification").get(id).delete().run();
+            return {
+                success: true,
+                message: "successfully deleted!"
+            };
+        }
+        catch (error) {
+            console.log("@@@error del notification :", error);
+            return {
+                success: false,
+                message: "server error!"
+            };
         }
     }
 }

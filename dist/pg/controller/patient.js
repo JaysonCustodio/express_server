@@ -9,9 +9,21 @@ const PatientController = {
         const result = await patient_1.default.getAllPatient();
         res.json(result);
     },
-    bookAppoitment: async (req, res) => {
-        const result = await patient_1.default.bookAppoitment(req.body);
+    getAllAppointment: async ({ params }, res) => {
+        const result = await patient_1.default.getAllApointment(params.id);
         res.json(result);
     },
+    addAppointment: async ({ body }, res) => {
+        const result = await patient_1.default.bookAppoitment(body);
+        res.json(result);
+    },
+    getNotification: async ({ params }, res) => {
+        const result = await patient_1.default.getNotification(params.id);
+        res.json(result);
+    },
+    deleteNotification: async ({ params }, res) => {
+        const result = await patient_1.default.deleteNotification(params.id);
+        res.json(result);
+    }
 };
 exports.default = PatientController;

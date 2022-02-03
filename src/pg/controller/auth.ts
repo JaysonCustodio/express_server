@@ -5,7 +5,7 @@ const AuthController = {
     const result = await AuthModel.signUp(body);
     res.json(result);
   },
-  login: async ({ body }: any, res: any) => {
+  login: async ({ body }: any, res: any) => {    
     const result = await AuthModel.signIn(body);
     res.json(result);
   },

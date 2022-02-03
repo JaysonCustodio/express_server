@@ -5,11 +5,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const interceptor = (req, res, next) => {
-    const token = req === null || req === void 0 ? void 0 : req.headers["access-token"];
+    const token = req === null || req === void 0 ? void 0 : req.headers["authorization"].split(" ")[1];
     if (!token)
         return res.send({ message: "token is required", success: false });
     try {
-        const decoded = jsonwebtoken_1.default.verify(token, process.env.TOKEN_KEY);
+        const decoded = jsonwebtoken_1.default.verify(token, "MIKEY");
         req.user = decoded;
     }
     catch (error) {

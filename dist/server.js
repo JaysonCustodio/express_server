@@ -16,7 +16,7 @@ app.use(cors_1.default(options));
 app.use(express_1.default.json());
 app.use("/", dental_1.default);
 dotenv_1.default.config();
-const { TESTIYFY_PORT } = process.env;
+const { TESTIYFY_PORT = 3000 } = process.env;
 app.listen(TESTIYFY_PORT, async () => {
     console.log(`Express server listening at port ${TESTIYFY_PORT}`);
 });

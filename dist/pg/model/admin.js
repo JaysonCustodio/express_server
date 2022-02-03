@@ -3,15 +3,34 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const pg_config_1 = __importDefault(require("../../config/pg_config"));
+const client_1 = __importDefault(require("../../config/client"));
 class AdminModel {
+    static async getToothRecord(personId) {
+        try {
+            console.log("personId2@@@@", personId);
+            const records = await client_1.default.table("toothrecord").filter({ personId: personId }).run();
+            return records;
+        }
+        catch (error) {
+            console.log('@error medicalrecords', error);
+        }
+    }
+    static async getMedicatlRecords(personId) {
+        try {
+            const records = await client_1.default.table("medical").filter({ personId: personId }).run();
+            return records;
+        }
+        catch (error) {
+            console.log('@error medicalrecords', error);
+        }
+    }
     static async getAppointmentByStatus(status) {
         try {
-            const client = await pg_config_1.default.connect();
-            const sql_status = `SELECT * FROM appointment where status = '${status}'`;
-            const { rows } = await client.query(sql_status);
-            client.release();
-            return { success: true, payload: rows };
+            const apps = await client_1.default
+                .table("appointment")
+                .filter({ status: status })
+                .run();
+            return apps;
         }
         catch (error) {
             return { success: false, payload: error.message };
@@ -19,11 +38,8 @@ class AdminModel {
     }
     static async getAllPatients() {
         try {
-            const client = await pg_config_1.default.connect();
-            const sql_status = `SELECT * FROM appointment where status = '${status}'`;
-            const { rows } = await client.query(sql_status);
-            client.release();
-            return { success: true, payload: rows };
+            const patients = await client_1.default.table("person").filter({ type: "patient" }).run();
+            return { success: true, payload: patients };
         }
         catch (error) {
             return { success: false, payload: [], message: error.message };
@@ -31,14 +47,10 @@ class AdminModel {
     }
     static async deleteAppointmentById(id) {
         try {
-            const client = await pg_config_1.default.connect();
-            const sql_status = `DELETE FROM appointment WHERE appointmentid = ${id};`;
-            await client.query(sql_status);
-            client.release();
+            await client_1.default.table("appointment").get(id).delete().run();
             return {
-                success: true,
-                payload: { appointmentid: id },
-                message: `Appointment id ${id} succesfully deleted`,
+                message: "succesfully deleted",
+                success: true
             };
         }
         catch (error) {
@@ -49,16 +61,18 @@ class AdminModel {
             };
         }
     }
-    static async updateAppointmentById(id) {
+    static async updateAppointmentById(id, personId) {
         try {
-            const client = await pg_config_1.default.connect();
-            const sql = `UPDATE appointment SET status = 'approve' WHERE appointmentid = ${id};`;
-            await client.query(sql);
-            client.release();
+            await client_1.default.table("appointment").get(id).update({ status: "approve" }).run();
+            if (personId) {
+                await client_1.default.table("notification").insert({
+                    personId,
+                    message: "Thank you for booking, Your appointment has been approved"
+                }).run();
+            }
             return {
                 success: true,
-                payload: { appointmentid: id },
-                message: `Appointment id ${id} succesfully approve`,
+                message: "good"
             };
         }
         catch (error) {
