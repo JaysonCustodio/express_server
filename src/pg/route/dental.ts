@@ -14,9 +14,12 @@ dental.get("/patient/appointments/:id", interceptor, PatientController.getAllApp
 dental.get("/patient/notifications/:id", interceptor, PatientController.getNotification)
 dental.delete("/patient/notifications/:id", interceptor, PatientController.deleteNotification)
 
+dental.get("/admin/accounts", interceptor, AdminController.getAccounts)
+dental.put("/admin/tooth", interceptor, AdminController.updateToothRecord)
 dental.get("/admin/patients", interceptor, AdminController.getAllPatients);
 dental.get("/admin/appointments/:status",interceptor,AdminController.getAllAppointmentByStatus);
 dental.put("/admin/appointment/:id/:personId",interceptor,AdminController.updateAppointmentById);
 dental.get("/admin/medicalrecords/:personId", interceptor, AdminController.getMedicalRecord)
 dental.get("/admin/tooth/:personId", interceptor, AdminController.getToothRecord)
+
 export default dental;

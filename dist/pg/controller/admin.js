@@ -5,9 +5,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const admin_1 = __importDefault(require("../model/admin"));
 const AdminController = {
+    updateToothRecord: async ({ body }, res) => {
+        const result = await admin_1.default.updatePatientTooth(body);
+        res.json(result);
+    },
+    getAccounts: async (_, res) => {
+        const result = await admin_1.default.getAccounts();
+        res.json(result);
+    },
     getToothRecord: async ({ params }, res) => {
         const result = await admin_1.default.getToothRecord(params.personId);
-        console.log("@result", result);
         res.json(result);
     },
     getAllAppointmentByStatus: async ({ params }, res) => {

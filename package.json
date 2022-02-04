@@ -8,6 +8,7 @@
     "watch:dist": "pm2-runtime process-dev.json",
     "build": "rm -rf ./dist && tsc",
     "dev": "concurrently npm:watch:*",
+    "script":"ts-node src/script.ts",
     "start": "pm2-runtime process.json",
     "server": "tsc && node ./dist/server.js",
     "test2": "tsc && node ./dist/test.js",

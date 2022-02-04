@@ -1,9 +1,5 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const client_1 = __importDefault(require("./config/client"));
 const rrag = require('real-random-address');
 const randomBirthday = require('random-birthday');
 const patientGen = async () => {
@@ -39,15 +35,20 @@ const patientGen = async () => {
     //     officeAddress: "Nasipit, Talamban",
     //     smoker: "occationally"
     // }
-    const tooth = {
-        condition: "Decayed",
-        personId: "fa9bcf27-204d-4b98-b125-0fe36326c444",
-        selectedPart: ["left", "center"],
-        toothNo: 16
-    };
+    // const tooth : IToothRecord = {
+    //     condition: "Decayed",
+    //     personId: "fa9bcf27-204d-4b98-b125-0fe36326c444",
+    //     isBottom: false,
+    //     isCenter: false,
+    //     isRight: false,
+    //     isLeft: true,
+    //     isTop: true,
+    //     toothNo: 16
+    // }
+    // await client.table("toothrecord").get("5f01e9fc-0e63-482b-902f-6738112cbdb4").delete().run()
     // await client.table("person").insert(person).run()
     // await client.table("medical").insert(medical).run()
-    await client_1.default.table("toothrecord").insert(tooth).run();
+    // await client.table("toothrecord").insert(tooth).run()
     // console.log(person);
     // console.log(medical);
     // const user: IUser = {

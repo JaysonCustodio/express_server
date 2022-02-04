@@ -16,6 +16,8 @@ dental.delete("/patient/appointment/:id", interceptor_1.default, admin_1.default
 dental.get("/patient/appointments/:id", interceptor_1.default, patient_1.default.getAllAppointment);
 dental.get("/patient/notifications/:id", interceptor_1.default, patient_1.default.getNotification);
 dental.delete("/patient/notifications/:id", interceptor_1.default, patient_1.default.deleteNotification);
+dental.get("/admin/accounts", interceptor_1.default, admin_1.default.getAccounts);
+dental.put("/admin/tooth", interceptor_1.default, admin_1.default.updateToothRecord);
 dental.get("/admin/patients", interceptor_1.default, admin_1.default.getAllPatients);
 dental.get("/admin/appointments/:status", interceptor_1.default, admin_1.default.getAllAppointmentByStatus);
 dental.put("/admin/appointment/:id/:personId", interceptor_1.default, admin_1.default.updateAppointmentById);

@@ -47,21 +47,26 @@ const patientGen = async () => {
     // }
 
 
-    const tooth : IToothRecord = {
-        condition: "Decayed",
-        personId: "fa9bcf27-204d-4b98-b125-0fe36326c444",
-        isBottom: false,
-        isCenter: false,
-        isRight: false,
-        isLeft: true,
-        isTop: true,
-        toothNo: 16
-    }
 
+
+
+    // const tooth : IToothRecord = {
+    //     condition: "Decayed",
+    //     personId: "fa9bcf27-204d-4b98-b125-0fe36326c444",
+    //     isBottom: false,
+    //     isCenter: false,
+    //     isRight: false,
+    //     isLeft: true,
+    //     isTop: true,
+    //     toothNo: 16
+    // }
+
+
+    // await client.table("toothrecord").get("5f01e9fc-0e63-482b-902f-6738112cbdb4").delete().run()
 
     // await client.table("person").insert(person).run()
     // await client.table("medical").insert(medical).run()
-    await client.table("toothrecord").insert(tooth).run()
+    // await client.table("toothrecord").insert(tooth).run()
     // console.log(person);
     // console.log(medical);
     

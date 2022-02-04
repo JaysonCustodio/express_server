@@ -1,10 +1,16 @@
 import AdminModel from "../model/admin";
 
 const AdminController = {  
+  updateToothRecord: async ({ body }: any, res: any) => {
+    const result = await AdminModel.updatePatientTooth(body)    
+    res.json(result);
+  },
+  getAccounts: async (_: any, res: any) => {
+    const result = await AdminModel.getAccounts()
+    res.json(result);
+  },
   getToothRecord: async ({ params }: any, res: any) => {
-    const result = await AdminModel.getToothRecord(params.personId);
-    console.log("@result", result);
-    
+    const result = await AdminModel.getToothRecord(params.personId);    
     res.json(result);
   },
   getAllAppointmentByStatus: async ({ params }: any, res: any) => {
