@@ -1,8 +1,36 @@
 import AdminModel from "../model/admin";
 
 const AdminController = {  
+  getAllTreatmentRecord:async (_ : any, res : any) => {
+    const result = await AdminModel.getAllTreatmentRecord()
+    res.json(result)
+  },
+  getTreatmentRecord:async ({params} : any, res : any) => {
+    const result = await AdminModel.getTreatmentRecord(params.id)
+    res.json(result)
+  },
+  addTreatmentRecord: async ({ body }: any, res: any) => {
+    const result = await AdminModel.addTreatment(body)
+    res.json(result);
+  },
+  addPatientMedicalRecord: async ({ body }: any, res: any) => {
+    const result = await AdminModel.addPatientRecord(body.patient, body.medical)
+    res.json(result);
+  },
+  deletePatient: async ({ params }: any, res: any) => {
+    const result = await AdminModel.deletePatient(params.id)    
+    res.json(result);
+  },
+  deleteAccount: async ({ params }: any, res: any) => {
+    const result = await AdminModel.deleteAccount(params.id)    
+    res.json(result);
+  },
   updateToothRecord: async ({ body }: any, res: any) => {
     const result = await AdminModel.updatePatientTooth(body)    
+    res.json(result);
+  },
+  addtAccount: async ({ body }: any, res: any) => {
+    const result = await AdminModel.addAccounts(body)
     res.json(result);
   },
   getAccounts: async (_: any, res: any) => {
@@ -31,6 +59,10 @@ const AdminController = {
   },
   getMedicalRecord:async ({params} : any, res: any) => {    
     const result = await AdminModel.getMedicatlRecords(params.personId)    
+    res.json(result)
+  },
+  sendMessage:async ({ body }: any, res: any) => {
+    const result = await AdminModel.sendTextMessage(body)
     res.json(result)
   }
 };

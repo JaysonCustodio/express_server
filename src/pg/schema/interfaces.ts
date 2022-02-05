@@ -42,9 +42,10 @@ export interface IAppointment {
 
 export interface IMedicalRecord {
   personId: string,
-  officeAddress: string,
   doctor: string,
-  isHospitalized: boolean,
+  officeNo: string,
+  officeAddress: string,
+  hospitalized: string,
   healthCondition: string,
   illness: string,
   smoker: string,
@@ -66,7 +67,7 @@ export interface IToothRecord {
 }
 
 export interface ITreatmentRecord {
-  AppointmentDate: string,
+  appointmentDate: string,
   toothNo: number,
   procedure: string,
   dentist: string,

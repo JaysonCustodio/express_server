@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const uuidv4_1 = require("uuidv4");
 const rrag = require('real-random-address');
 const randomBirthday = require('random-birthday');
 const patientGen = async () => {
@@ -35,6 +36,17 @@ const patientGen = async () => {
     //     officeAddress: "Nasipit, Talamban",
     //     smoker: "occationally"
     // }
+    const id = uuidv4_1.uuid();
+    const a = {
+        id,
+        name: "sadasd",
+    };
+    const medical = {
+        a: "a",
+        b: "b"
+    };
+    const role = "PATIENT";
+    console.log(Object.assign(Object.assign({}, medical), { personId: id }));
     // const tooth : IToothRecord = {
     //     condition: "Decayed",
     //     personId: "fa9bcf27-204d-4b98-b125-0fe36326c444",
